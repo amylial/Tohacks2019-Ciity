@@ -31,11 +31,7 @@ const withAuthentication = Component => {
             console.log(this.state.authUser);
             return (
                 <AuthUserContext.Provider value={this.state.authUser}>
-                    <AuthUserContext.Consumer>
-                        {authUser => 
-                            <Component {...this.props} authUser={authUser} />
-                        }   
-                    </AuthUserContext.Consumer>
+                    <Component {...this.props} />
                 </AuthUserContext.Provider> 
             );
         }
