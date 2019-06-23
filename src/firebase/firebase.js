@@ -24,6 +24,8 @@ class Firebase {
         this.auth.currentUser.updatePassword(password);
 
     jobs = () => this.db.ref('jobs/');
+
+    user = (uid) => this.db.ref('')
 }
 
 

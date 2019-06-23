@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { withFirebase } from '../firebase';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -34,15 +35,15 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Navbar = ({ authUser }) => {
+const Navbar = ({ authUser, firebase }) => {
     console.log(authUser);
     return (
-        <div>{authUser ? <NavbarAuth /> : <NavbarNonAuth />}</div>
+        <div>{authUser ? <NavbarAuth firebase={firebase} /> : <NavbarNonAuth />}</div>
     );
 };
 
 
-const NavbarAuth = () => {
+const NavbarAuth = ({ firebase }) => {
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -55,6 +56,11 @@ const NavbarAuth = () => {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
+    }
+
+    const logout = (firebase) =>{
+        handleMenuClose();
+        firebase.doSignOut();
     }
 
     const menuId = 'primary-search-account-menu';
@@ -70,6 +76,7 @@ const NavbarAuth = () => {
         >
           <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
           <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+          <MenuItem onClick={event => logout(firebase)}>Logout</MenuItem>
         </Menu>
       );
 
@@ -125,4 +132,4 @@ const MenuButton = props => {
     );
 }
 
-export default Navbar;
+export default withFirebase(Navbar);

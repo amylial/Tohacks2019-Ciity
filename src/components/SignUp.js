@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
 import * as ROUTES from '../constants/routes';
+import { TextField } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 
 const INITIAL_STATE = {
     username: '',
@@ -12,12 +20,40 @@ const INITIAL_STATE = {
     error: null,
 };
 
-const SignUpPage = () => (
-    <div>
-        <h1>SignUp</h1>
-        <SignUpForm />
-    </div>
-);
+const useStyles = makeStyles(theme => ({
+    '@global': {
+        body: {
+            backgroundColor: theme.palette.common.white,
+        },
+    },
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
+
+
+const SignUpPage = () => {
+    const classes = useStyles();
+    return(
+        <div>
+            <SignUpForm classes={classes} />
+        </div>
+    );
+}
 
 class SignUpFormBase extends Component {
     constructor(props) {
@@ -62,39 +98,83 @@ class SignUpFormBase extends Component {
             username === '';
 
         return (
-            <form onSubmit={this.onSubmit}>
-                <input
-                    name="username"
-                    value={username}
-                    onChange={this.onChange}
-                    type="text"
-                    placeholder="Full Name"
-                />
-                <input
-                    name="email"
-                    value={email}
-                    onChange={this.onChange}
-                    type="text"
-                    placeholder="Email Address"
-                />
-                <input
-                    name="passwordOne"
-                    value={passwordOne}
-                    onChange={this.onChange}
-                    type="password"
-                    placeholder="Password"
-                />
-                <input
-                    name="passwordTwo"
-                    value={passwordTwo}
-                    onChange={this.onChange}
-                    type="password"
-                    placeholder="Confirm Password"
-                />
-                <button disabled={isInvalid} type="submit">Sign Up</button>
+            <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={this.props.classes.paper}>
+                <Avatar className={this.props.classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign up
+                </Typography>
+            <form className={this.props.classes.form} noValidate onSubmit={this.onSubmit}>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        value={username}
+                        onChange={this.onChange}
+                        autoComplete="name"
+                        autoFocus
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email"
+                        name="Email"
+                        value={email}
+                        onChange={this.onChange}
+                        autoComplete="email"
+                        autoFocus
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="password1"
+                        label="Password"
+                        name="PasswordOne"
+                        value={passwordOne}
+                        onChange={this.onChange}
+                        autoComplete="password1"
+                        autoFocus
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="password2"
+                        label="Password Again"
+                        name="PasswordTwo"
+                        value={passwordTwo}
+                        onChange={this.onChange}
+                        autoComplete="password2"
+                        autoFocus
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        disabled={isInvalid}
+                        className={this.props.classes.submit}
+                    >
+                        Sign In
+                    </Button>
 
                 {error && <p>{error.message}</p>}
             </form>
+            </div>
+        </Container>
         );
     }
 }
