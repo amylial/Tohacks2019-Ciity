@@ -4,8 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Center from 'react-center'
 import Fade from 'react-reveal/Fade'
-import { fontFamily } from '@material-ui/system';
-import { Link } from "react-router-dom";
 
 const styles = {
     paperContainer: {
@@ -20,8 +18,8 @@ const styles = {
         textDecoration: 'none',
         justifyContent: 'center',
         color: '#FFFFFF',
-        fontSize: '75px',
-        fontFamily: 'Monoton',
+        fontSize: '90px',
+        fontFamily: 'Roboto',
         
     },
 };

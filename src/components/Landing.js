@@ -1,10 +1,11 @@
 import React from 'react';
 import bg from './splash.jpg';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Center from 'react-center'
-import { Link } from "react-router-dom";
-
+import Fade from 'react-reveal/Fade'
+import First from './FirstPage'
+import Second from './SecondPage'
+import Third from './ThirdPage'
+import Fourth from './FourthPage'
+import Fifth from './FifthPage'
 
 const styles = {
     paperContainer: {
@@ -14,42 +15,35 @@ const styles = {
     },
 
     Inspiration: {
+        
         paddingTop: 160,
         textDecoration: 'none',
         justifyContent: 'center',
         color: '#FFFFFF',
         fontSize: '75px',
-    },
-
-    Inspiration2: {
-        paddingTop: 10,
-        textDecoration: 'none',
-        textDecorationUnderline: 'none',
-        justifyContent: 'center',
-        color: '#FF0000',
-        fontSize: '75px',
+        fontFamily: 'Monoton',
+        
     },
 };
 
 export default class Landing extends React.Component {
-    render() {
-        return (
-            <Paper style={styles.paperContainer}>
-                <Typography style={styles.Inspiration}>
-                    <Center>
-                        YOUR IDEAS MATTER
-                    </Center>
-                </Typography>
-                <Link to="/stories">
-                    <Typography style={styles.Inspiration2}>
-                        <Center>
-                            HERE
-                        </Center>
-                    </Typography>
-                </Link>
-
-            </Paper>
-
-        )
+     render() {
+       return(
+          <div>
+                <First/> 
+                 <Fade bottom>
+                     <Second/>
+                 </Fade>
+                 <Fade bottom>
+                     <Third/>
+                 </Fade>
+                 <Fade bottom>
+                     <Fourth/>
+                 </Fade>
+                 <Fade bottom>
+                     <Fifth/>
+                 </Fade> 
+            </div>
+       );
+     }
     }
-}
