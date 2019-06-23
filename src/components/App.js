@@ -10,6 +10,27 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Home from './Home';
 import '../css/App.css';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    footer:{
+        height: '50px',
+        width: '100%',
+        background: '#FF0000',
+        color: '#00FF00'
+    }
+}));
+
+
+const Footer = () => {
+    const classes = useStyles();
+
+    return(
+        <div className={classes.footer}>
+            Powered By Pingu
+        </div>
+    ); 
+};
 
 class App extends Component {
     constructor(props){
@@ -33,6 +54,7 @@ class App extends Component {
                     <Route path={ROUTES.HOME} component={Home} />
 
                 </div>
+                {/* <Footer /> */}
          </Router>
         );
     }

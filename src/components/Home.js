@@ -21,6 +21,7 @@ const sideBarStyles = makeStyles(theme => ({
         width: 200,
         flex: 1,
         minHeight: window.innerHeight,
+        height: "100%",
         borderRight: '1px solid rgb(0,0,0)',
     },
     drawer: {
@@ -44,7 +45,8 @@ const sideBarStyles = makeStyles(theme => ({
     image:{
         maxWidth: 300,
         minWidth: 300,
-        maxHeight: 200
+        maxHeight: 200,
+        height: 200
     },
     grid: {
         overflow: 'hidden'

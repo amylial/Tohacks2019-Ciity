@@ -1,6 +1,7 @@
-import app from 'firebase/app';
+import app, { GoogleAuthProvider } from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import * as firebase from 'firebase';
 import config from '../config';
 
 class Firebase {
@@ -22,8 +23,13 @@ class Firebase {
 
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
+    
+    doSignInWithGmail = () => {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        this.auth.signInWithRedirect(provider);
+    }
 
-    jobs = () => this.db.ref('jobs/');
+    jobs = () => this.db.ref('Jobs/');
 
     user = (uid) => this.db.ref('')
 }

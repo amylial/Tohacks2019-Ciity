@@ -32,7 +32,7 @@ export default class First extends React.Component {
                 <Typography style={styles.Inspiration}>
                     <Fade top>
                         <Center>
-                        Tentative Title
+                        Ciity
                         </Center>
                     </Fade>
                 </Typography>

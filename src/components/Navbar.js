@@ -32,13 +32,16 @@ const useStyles = makeStyles(theme => ({
     appbar: {
         backgroundColor: '#FFFFFF',
         color: '#000000'
+    },
+    navbar: {
+        fontSize: '20px',
     }
 }));
 
 const Navbar = ({ authUser, firebase }) => {
-    console.log(authUser);
+    const classes = useStyles();
     return (
-        <div>{authUser ? <NavbarAuth firebase={firebase} /> : <NavbarNonAuth />}</div>
+        <div >{authUser ? <NavbarAuth style={classes.navbar} firebase={firebase} /> : <NavbarNonAuth />}</div>
     );
 };
 
@@ -85,7 +88,7 @@ const NavbarAuth = ({ firebase }) => {
         <AppBar className={classes.appbar} position="static">
             <Toolbar >
                 <Typography variant="h6" className={classes.title}>
-                    TITLE
+                Ciity
                 </Typography>
                 <MenuButton to={ROUTES.LANDING} text={'Landing'} />
                 <MenuButton to={ROUTES.HOME} text={'Home'} />
@@ -112,10 +115,10 @@ const NavbarNonAuth = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar className={classes.appbar} position="static">
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        TITLE
+                        Ciity
                     </Typography>
                     <MenuButton to={ROUTES.LANDING} text={'Landing'} />
                     <MenuButton to={ROUTES.SIGN_IN} text={'Login'} />

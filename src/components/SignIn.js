@@ -79,6 +79,19 @@ const SignInFormBase = props => {
         event.preventDefault();
     };
 
+    const googleSignIn = (event) => {
+        event.preventDefault();
+        props.firebase
+            .doSignInWithGmail()
+            .then(result => {
+                var token = result.credential.accessToken;
+                var user = result.user;
+            })
+            .catch(error => {
+                setError(error);
+            });
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -128,7 +141,18 @@ const SignInFormBase = props => {
                         className={classes.submit}
                     >
                         Sign In
-              </Button>
+                    </Button>
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={(event) => googleSignIn(event)}
+                    >
+                        Sign In With Googler
+                    </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">

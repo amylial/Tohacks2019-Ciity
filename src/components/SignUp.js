@@ -127,8 +127,8 @@ class SignUpFormBase extends Component {
                         required
                         fullWidth
                         id="email"
-                        label="Email"
-                        name="Email"
+                        label="email"
+                        name="email"
                         value={email}
                         onChange={this.onChange}
                         autoComplete="email"
@@ -139,12 +139,12 @@ class SignUpFormBase extends Component {
                         margin="normal"
                         required
                         fullWidth
-                        id="password1"
-                        label="Password"
-                        name="PasswordOne"
+                        id="passwordOne"
+                        label="passwordOne"
+                        name="passwordOne"
                         value={passwordOne}
                         onChange={this.onChange}
-                        autoComplete="password1"
+                        autoComplete="passwordOne"
                         autoFocus
                     />
                     <TextField
@@ -152,12 +152,12 @@ class SignUpFormBase extends Component {
                         margin="normal"
                         required
                         fullWidth
-                        id="password2"
-                        label="Password Again"
-                        name="PasswordTwo"
+                        id="passwordTwo"
+                        label="passwordTwo Again"
+                        name="passwordTwo"
                         value={passwordTwo}
                         onChange={this.onChange}
-                        autoComplete="password2"
+                        autoComplete="passwordTwo"
                         autoFocus
                     />
                     <Button
@@ -168,7 +168,7 @@ class SignUpFormBase extends Component {
                         disabled={isInvalid}
                         className={this.props.classes.submit}
                     >
-                        Sign In
+                        Sign Up
                     </Button>
 
                 {error && <p>{error.message}</p>}
