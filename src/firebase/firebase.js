@@ -1,11 +1,13 @@
 import app from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 import config from '../config';
 
 class Firebase {
     constructor() {
         app.initializeApp(config);
         this.auth = app.auth();
+        this.db = app.database();
     }
 
     doCreateUserWithEmailAndPassword = (email, password) =>
@@ -20,6 +22,8 @@ class Firebase {
 
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
+
+    jobs = () => this.db.ref('jobs/');
 }
 
 

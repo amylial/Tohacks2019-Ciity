@@ -8,11 +8,11 @@ import Navbar from './Navbar';
 import SignIn from './SignIn';
 // import SignOut from './SignOut';
 import SignUp from './SignUp';
+import Home from './Home';
 
 class App extends Component {
     constructor(props){
         super(props);
-        console.log(props.authUser);
     }
 
     render(){
@@ -28,24 +28,11 @@ class App extends Component {
 
                     <Route path={ROUTES.SIGN_UP} component={SignUp} />
                     <Route path={ROUTES.SIGN_IN} component={SignIn} />
+                    <Route path={ROUTES.HOME} component={Home} />
                 </div>
             </Router>
         );
     }
 }
-
-// const App = () => {
-
-//     return (
-//         <Router>
-//             <div>
-//                 <Navbar />
-
-//                 <Route path={ROUTES.SIGN_UP} component={SignUp} />
-//                 <Route path={ROUTES.SIGN_IN} component={SignIn} />
-//             </div>
-//         </Router>
-//     );
-// }
 
 export default withAuthentication(App)

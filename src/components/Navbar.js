@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // import SignOutButton from '../SignOut';
@@ -9,8 +9,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        color: '#FFFFFF',
+        color: '#000000',
     },
     buttonLink: {
         textDecoration: 'none',
@@ -26,6 +28,10 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 1,
     },
+    appbar: {
+        backgroundColor: '#FFFFFF',
+        color: '#000000'
+    }
 }));
 
 const Navbar = ({ authUser }) => {
@@ -33,26 +39,67 @@ const Navbar = ({ authUser }) => {
     return (
         <div>{authUser ? <NavbarAuth /> : <NavbarNonAuth />}</div>
     );
+};
+
+
+const NavbarAuth = () => {
+    const classes = useStyles();
+
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const isMenuOpen = Boolean(anchorEl);
+
+    const handleProfileMenuOpen = event => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    }
+
+    const menuId = 'primary-search-account-menu';
+    const renderMenu = (
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          id={menuId}
+          keepMounted
+          transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={isMenuOpen}
+          onClose={handleMenuClose}
+        >
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        </Menu>
+      );
+
+    return(
+        <div className={classes.root}>
+        <AppBar className={classes.appbar} position="static">
+            <Toolbar >
+                <Typography variant="h6" className={classes.title}>
+                    TITLE
+                </Typography>
+                <MenuButton to={ROUTES.LANDING} text={'Landing'} />
+                <MenuButton to={ROUTES.HOME} text={'Home'} />
+                {/* <MenuButton to={ROUTES.ACCOUNT} text={'Account'} /> */}
+                <IconButton
+              edge="end"
+              aria-label="Account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
+        {renderMenu}
+    </div>
+    );
 }
 
-
-
-const NavbarAuth = () => (
-    <ul>
-        <li>
-            <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.HOME}>Home</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.ACCOUNT}>Account</Link>
-        </li>
-        {/* <li>
-      <SignOutButton />
-    </li> */}
-    </ul>
-);
 
 const NavbarNonAuth = () => {
     const classes = useStyles();
